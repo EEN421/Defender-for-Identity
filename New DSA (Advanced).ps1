@@ -1,4 +1,8 @@
-# Author: Ian D. Hanley | KMicro Tech, Inc | https://kmicro.com
+# Author: Ian D. Hanley | LinkedIn: /in/ianhanley/ | Twitter: @IanDHanley
+# Github: https://github.com/EEN421
+# Website: www.hanleycloudsolutions.com
+# Blog: Hanley.cloud / DevSecOpsDad.com
+
 # Description: This script facilitates a custom setup for more advanced, multi-domain environments by allowing the user specify a HostGroup and DC's with the MDI sensor installed.
 # Note: In a multi-domain environment, it's best practice to leverage separate gMSA's per domain to act as DSA's for MDI.
 
