@@ -25,3 +25,14 @@ $principalsArray | ForEach-Object { Get-ADComputer -Identity $_ } |
 
 # Step 5: Create the gMSA and associate it with the group:
 New-ADServiceAccount -Name $DSA_AccountName -DNSHostName "$DSA_AccountName.$domain" -PrincipalsAllowedToRetrieveManagedPassword $DSA_HostsGroup
+
+# Step 6: Grab distinguished name for Deleted Objects
+$distinguishedName = ([adsi]'').distinguishedName.Value
+$deletedObjectsDN = "CN=Deleted Objects,$distinguishedName"
+
+# Step 7: Make current user the Owner of Deleted Objects (required for next step)
+dsacls.exe "$deletedObjectsDN" /takeOwnership
+
+# Step 8: Assign read permissions for Deleted Objects to DSA account
+# This requires current user account to have ownership (see previous command)
+dsacls.exe "$deletedObjectsDN" /G "$domain\$(DSA_AccountName):LCRP"
